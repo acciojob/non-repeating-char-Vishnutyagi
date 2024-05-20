@@ -1,15 +1,27 @@
 function firstNonRepeatedChar(str) {
-	 let mp=new Map();
-	for(let i=0; i<str.length; i++){
-		if(mp.has(str[i])){
-			mp.set(str[i],mp.get(str[i])+1);
-		}
-		else mp.set(str[i],1);
-	}
-	for(let i=0; i<str.length; i++){
-		if(mp.get(str[i])==1) return str[i];
-	}
-	return "null";
+	 if (!str) {
+        return null;
+    }
+
+    const charCount = {};
+
+    // First pass: count the occurrences of each character
+    for (let char of str) {
+        if (charCount[char] === undefined) {
+            charCount[char] = 1;
+        } else {
+            charCount[char]++;
+        }
+    }
+
+    // Second pass: find the first non-repeated character
+    for (let char of str) {
+        if (charCount[char] === 1) {
+            return char;
+        }
+    }
+
+    return null;
 }
 const input = prompt("Enter a string");
 alert(firstNonRepeatedChar(input)); 
